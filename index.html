@@ -9,34 +9,98 @@
 </head>
 <body>
     <div class="container">
-        <button id="gridBtn">Set Grid Size</button>
+        <div class="header">
+            <button id="gridBtn">Set Grid Size</button>
+            <button id="clearBtn">Clear</button>
+        </div>
     </div>
 
     <script>
-        // Create 16x16 Grid
-
-        let row = 16;
-        let col = 16;
-
+        // Initialise globals
         const container = document.querySelector(".container");
-
         const grid = document.createElement("div");
+        const header = document.querySelector(".header");
+        const textGridSize = document.createElement("span");
+        const gridBtn = document.getElementById("gridBtn");
+        const clearBtn = document.getElementById("clearBtn");
+
+        // Create 16x16 Grid
+        let gridSize = 16;
+
         grid.setAttribute("id", "grid");
         container.appendChild(grid);
 
-        for (y = 0; y <= row; y++) {
+        for (y = 0; y <= gridSize; y++) {
         const row = document.createElement("div");
         row.classList.add("row");
-        row.textContent = y;
+        // row.textContent = y;
         grid.appendChild(row);
 
-            for (x = 0; x <= col; x++) {
+            for (x = 0; x <= gridSize; x++) {
                 const square = document.createElement("div");
                 square.classList.add("square");
-                square.textContent = x;
+                // square.textContent = x;
                 row.appendChild(square);
             }
         }
+
+        // Header Extras
+        textGridSize.textContent = gridSize;
+        header.insertBefore(textGridSize, gridBtn);
+
+        // Grid Size Button
+        gridBtn.addEventListener("click", (event) => {
+            gridSize = prompt("Set Grid Size");
+            console.log(gridSize);
+
+            // Delete rows
+            const gridRowNodeList = document.querySelectorAll(".row");
+            for (i = 0; i < gridRowNodeList.length; i++) {
+                grid.removeChild(grid.lastChild);
+            }
+
+            // Create rows
+            for (y = 1; y <= gridSize; y++) {
+                const row = document.createElement("div");
+                row.classList.add("row");
+                // row.textContent = y;
+                grid.appendChild(row);
+
+                for (x = 1; x <= gridSize; x++) {
+                    const square = document.createElement("div");
+                    square.classList.add("square");
+                    // square.textContent = x;
+                    row.appendChild(square);
+                }
+            }
+
+            textGridSize.textContent = gridSize;
+            header.insertBefore(textGridSize, gridBtn);
+        });
+
+        // Clear Button
+        clearBtn.addEventListener("click", (event) => {
+            // Delete rows
+            const gridRowNodeList = document.querySelectorAll(".row");
+            for (i = 0; i < gridRowNodeList.length; i++) {
+                grid.removeChild(grid.lastChild);
+            }
+
+            // Create rows
+            for (y = 1; y <= gridSize; y++) {
+                const row = document.createElement("div");
+                row.classList.add("row");
+                // row.textContent = y;
+                grid.appendChild(row);
+
+                for (x = 1; x <= gridSize; x++) {
+                    const square = document.createElement("div");
+                    square.classList.add("square");
+                    // square.textContent = x;
+                    row.appendChild(square);
+                }
+            }
+        });
 
         // Mouse Hover Event Listener
         const test = document.getElementById("grid");
@@ -48,40 +112,11 @@
             false,
         );
 
-        test.addEventListener("mouseout", (event) => {
-            event.target.classList.remove("hover");
-            },
-            false,
-        );
-
-        // Grid Size Button
-
-        const btn = document.getElementById("gridBtn");
-        btn.addEventListener("click", (event) => {
-            let setGridSize = prompt("Set Grid Size");
-            console.log(setGridSize);
-
-            // Delete rows
-            const gridRowNodeList = document.querySelectorAll(".row");
-            for (i = 0; i < gridRowNodeList.length; i++) {
-                grid.removeChild(grid.lastChild);
-            }
-
-            // Create rows
-            for (y = 1; y <= setGridSize; y++) {
-                const row = document.createElement("div");
-                row.classList.add("row");
-                row.textContent = y;
-                grid.appendChild(row);
-
-                for (x = 1; x <= setGridSize; x++) {
-                    const square = document.createElement("div");
-                    square.classList.add("square");
-                    square.textContent = x;
-                    row.appendChild(square);
-                }
-            }
-        });
+        // test.addEventListener("mouseout", (event) => {
+        //     event.target.classList.remove("hover");
+        //     },
+        //     false,
+        // );
     </script>
 </body>
 </html>
