@@ -112,7 +112,16 @@
 
         test.addEventListener("mouseover", (event) => {
             // highlight the mouseenter target
-            event.target.classList.add("hover");
+            // event.target.classList.add("hover");
+
+            function random_rgba() {
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            }
+
+            let color = random_rgba();  
+
+            event.target.style.backgroundColor = color;
             },
             false,
         );
