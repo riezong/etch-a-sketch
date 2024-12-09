@@ -50,32 +50,37 @@
 
         // Grid Size Button
         gridBtn.addEventListener("click", (event) => {
-            gridSize = prompt("Set Grid Size");
-            console.log(gridSize);
+            newGridSize = prompt("Set Grid Size");
+            if (newGridSize > 100) {
+                alert("Too big!");
+            } else {
+                gridSize = newGridSize;
+                console.log(gridSize);
 
-            // Delete rows
-            const gridRowNodeList = document.querySelectorAll(".row");
-            for (i = 0; i < gridRowNodeList.length; i++) {
-                grid.removeChild(grid.lastChild);
-            }
-
-            // Create rows
-            for (y = 1; y <= gridSize; y++) {
-                const row = document.createElement("div");
-                row.classList.add("row");
-                // row.textContent = y;
-                grid.appendChild(row);
-
-                for (x = 1; x <= gridSize; x++) {
-                    const square = document.createElement("div");
-                    square.classList.add("square");
-                    // square.textContent = x;
-                    row.appendChild(square);
+                // Delete rows
+                const gridRowNodeList = document.querySelectorAll(".row");
+                for (i = 0; i < gridRowNodeList.length; i++) {
+                    grid.removeChild(grid.lastChild);
                 }
-            }
 
-            textGridSize.textContent = gridSize;
-            header.insertBefore(textGridSize, gridBtn);
+                // Create rows
+                for (y = 1; y <= gridSize; y++) {
+                    const row = document.createElement("div");
+                    row.classList.add("row");
+                    // row.textContent = y;
+                    grid.appendChild(row);
+
+                    for (x = 1; x <= gridSize; x++) {
+                        const square = document.createElement("div");
+                        square.classList.add("square");
+                        // square.textContent = x;
+                        row.appendChild(square);
+                    }
+                }
+
+                textGridSize.textContent = gridSize;
+                header.insertBefore(textGridSize, gridBtn);
+            }
         });
 
         // Clear Button
